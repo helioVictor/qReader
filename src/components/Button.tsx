@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text, View, StyleSheet, Pressable, GestureResponderEvent } from 'react-native';
+import { Text, StyleSheet, Pressable, GestureResponderEvent } from 'react-native';
 import { MyTheme } from '../../theme';
 
 interface Props {
-    onPress: (event: GestureResponderEvent) => void;
-    title: string;
+  onPress: (event: GestureResponderEvent) => void;
+  title: string;
 }
 
 export default function Button({ onPress, title }: Props) {
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: MyTheme.colors.primary,
+    margin: 10
   },
   text: {
     fontSize: 16,

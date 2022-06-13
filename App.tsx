@@ -1,8 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './src/pages/Home';
+import { StyleSheet, View } from 'react-native';
 import { MyTheme } from './theme';
+import Home from './src/pages/Home';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   return (
@@ -13,11 +13,9 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    marginTop: StatusBar.currentHeight
   },
 });

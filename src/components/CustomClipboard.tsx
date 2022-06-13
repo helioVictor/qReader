@@ -1,39 +1,30 @@
-import { useState } from 'react';
 import {
   View,
-  Text,
-  TouchableOpacity,
   StyleSheet,
+  ToastAndroid,
 } from 'react-native';
 import Button from './Button';
 import * as Clipboard from 'expo-clipboard';
+import Card from './Card';
 
 interface Props {
-    content: string;
+  code: string;
+  codeType: string;
 }
 
-export default function CustomClipboard({ content }: Props) {
-    const [copiedText, setCopiedText] = useState('');
+export default function CustomClipboard({ code, codeType }: Props) {
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(code);
+    ToastAndroid.show('Copiado para área de transferência', ToastAndroid.LONG);
+  };
 
-    const copyToClipboard = async () => {
-        await Clipboard.setStringAsync(content);
-    };
-
-    const fetchCopiedText = async () => {
-        const text = await Clipboard.getStringAsync();
-        setCopiedText(text);
-        alert(copiedText)
-    };
-
-    return (
-        <View style={styles.container}>
-            <View style={styles.textContainer}>
-                <Text>{content}</Text>
-            </View>
-            <Button title="Click here to copy to Clipboard" onPress={copyToClipboard} />
-            <Button title="View copied text" onPress={fetchCopiedText} />
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Card title={'Tipo do código'} content={codeType} />
+      <Card title={'Código'} content={code} />
+      <Button title="Copiar" onPress={copyToClipboard} />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -42,8 +33,7 @@ const styles = StyleSheet.create({
     borderColor: '#666'
   },
   container: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 60
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
